@@ -1,0 +1,40 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  release:
+  schedule:
+    # Every Thursday at 1 AM
+    - cron: '0 1 * * 4'
+
+jobs:
+
+  Tests:
+    runs-on: 'ubuntu-latest'
+    name: ${{ format('{0} ({1})', matrix.session, matrix.python-version) }}
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        python-version: ['3.13']
+        session: [pylint, flake8, mypy]
+
+    env:
+      NOXSESSION: ${{ matrix.session }}
+      NOXPYTHON: ${{ matrix.python-version }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Nox
+        run: pip install nox
+
+      - name: Run Nox
+        run: nox
