@@ -5,6 +5,16 @@
   License, v. 2.0. If a copy of the MPL was not distributed with this
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+.. start-badges
+
+| |pypi|
+
+.. |pypi| image:: https://img.shields.io/pypi/v/imogen.svg?style=plastic&logo=pypi
+    :alt: PyPI Package latest release
+    :target: https://pypi.python.org/pypi/imogen
+
+.. end-badges
+
 
 Overview
 ========
