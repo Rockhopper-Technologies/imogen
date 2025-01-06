@@ -10,15 +10,21 @@ See https://nox.thea.codes/en/stable/config.html
 """
 
 import nox
-import tomli
+
+try:
+    # Python >= 3.11
+    import tomllib as toml
+except ImportError:
+    # Included with Nox for Python <= 3.11
+    import tomli as toml
 
 BASE_PYTHON = '3.13'
 
 with open('pyproject.toml', 'rb') as toml_file:
-    CONFIG = tomli.load(toml_file)
+    CONFIG = toml.load(toml_file)
 
 DEPENDENCIES = CONFIG['project']['dependencies']
-NOX_DEPENDENCIES = ('nox', 'tomli')
+NOX_DEPENDENCIES = ('nox',)
 
 
 @nox.session(python=BASE_PYTHON, tags=['lint'])
